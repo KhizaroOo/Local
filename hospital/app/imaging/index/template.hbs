@@ -1,0 +1,27 @@
+{{#item-listing paginationProps=paginationProps }}
+  {{#if hasRecords}}
+    <table class="table">
+      <tr class="table-header">
+        <th>{{t 'labels.date_requested'}}</th>
+        <th>{{t 'labels.requested_by'}}</th>
+        <th>{{t 'labels.patient'}}</th>
+        <th>{{t 'labels.imaging_type'}}</th>
+        <th>{{t 'labels.notes'}}</th>
+        {{#if showActions}}
+          <th>{{t 'labels.actions'}}</th>
+        {{/if}}
+      </tr>
+      {{#each model as |imaging|}}
+        {{imaging/index/requested-list-item
+          imaging=imaging
+          action="editItem"
+          showActions=showActions
+          canEdit=canEdit}}
+      {{/each}}
+    </table>
+  {{else}}
+    <div class="alert alert-info">
+      <p>{{t 'messages.no_items_found'}} {{#if canAdd}} <a href="#" {{action 'newItem'}}>{{t 'messages.create_new_record'}}</a>{{/if}}</p>
+    </div>
+  {{/if}}
+{{/item-listing}}
